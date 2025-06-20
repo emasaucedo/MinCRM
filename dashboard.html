@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini CRM - Dashboard</title>
+    <link href="./src/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <i class="fas fa-users text-blue-600 text-2xl mr-3"></i>
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Mini CRM</h1>
+                </div>
+                
+                <!-- User Panel -->
+                <div class="flex items-center space-x-4">
+                    <!-- Dark Mode Toggle -->
+                    <button id="darkModeToggle" class="text-gray-400 hover:text-blue-600 transition-colors" title="Toggle Dark Mode">
+                        <i class="fas fa-moon text-lg" id="darkModeIcon"></i>
+                    </button>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-blue-600 dark:text-blue-400 text-sm"></i>
+                        </div>
+                        <div class="hidden md:block">
+                            <p class="text-sm font-medium text-gray-900 dark:text-white" id="userEmail">demo@minicrm.com</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">Online</p>
+                        </div>
+                    </div>
+                    <button id="accountDetailsBtn" class="text-gray-400 hover:text-blue-600 transition-colors" title="Account Details">
+                        <i class="fas fa-cog text-lg"></i>
+                    </button>
+                    <button id="logoutBtn" class="text-gray-400 hover:text-red-600 transition-colors" title="Logout">
+                        <i class="fas fa-sign-out-alt text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Action Buttons -->
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Dashboard</h2>
+            <div class="flex items-center space-x-4">
+                <button id="addContactBtn" class="btn-primary">
+                    <i class="fas fa-plus mr-2"></i>New Contact
+                </button>
+                <button id="addTaskBtn" class="btn-secondary">
+                    <i class="fas fa-tasks mr-2"></i>New Task
+                </button>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mb-6">
+            <div class="border-b border-gray-200 dark:border-gray-700">
+                <nav class="-mb-px flex space-x-8">
+                    <button class="tab-btn active py-2 px-1 border-b-2 border-blue-500 font-medium text-sm text-blue-600 dark:text-blue-400" data-tab="contacts">
+                        <i class="fas fa-users mr-2"></i>Contacts
+                    </button>
+                    <button class="tab-btn py-2 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300" data-tab="tasks">
+                        <i class="fas fa-tasks mr-2"></i>Tasks
+                    </button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="tabContent">
+            <!-- Contacts Tab -->
+            <div id="contactsTab" class="tab-content active">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">My Contacts</h3>
+                    <div class="flex space-x-2">
+                        <input type="text" id="contactSearch" placeholder="Search by name or email..." class="input-field w-64">
+                        <select id="contactFilter" class="input-field w-32">
+                            <option value="">All</option>
+                            <option value="client">Clients</option>
+                            <option value="prospect">Prospects</option>
+                            <option value="supplier">Suppliers</option>
+                        </select>
+                        <select id="contactSort" class="input-field w-32">
+                            <option value="name">Sort by Name</option>
+                            <option value="email">Sort by Email</option>
+                            <option value="company">Sort by Company</option>
+                            <option value="date">Sort by Date</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="contactsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Contact cards will be dynamically added here -->
+                </div>
+            </div>
+
+            <!-- Tasks Tab -->
+            <div id="tasksTab" class="tab-content hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">My Tasks</h3>
+                    <div class="flex space-x-2">
+                        <input type="text" id="taskSearch" placeholder="Search tasks..." class="input-field w-64">
+                        <select id="taskFilter" class="input-field w-32">
+                            <option value="">All</option>
+                            <option value="pending">Pending</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                        <select id="taskSort" class="input-field w-32">
+                            <option value="title">Sort by Title</option>
+                            <option value="priority">Sort by Priority</option>
+                            <option value="dueDate">Sort by Due Date</option>
+                            <option value="date">Sort by Date</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="tasksList" class="space-y-4">
+                    <!-- Task items will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                    <i class="fas fa-users text-blue-600 dark:text-blue-400 text-xl"></i>
+                    <div>
+                        <p class="text-sm font-medium text-gray-900 dark:text-white">Mini CRM</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Designed for freelancers and entrepreneurs</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">Privacy Policy</a>
+                    <a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">Terms of Service</a>
+                    <a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">Support</a>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">© 2024 Mini CRM. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal fixed inset-0 bg-black bg-opacity-50 z-50" style="display: none;">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full">
+                <div class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white" id="contactModalTitle">New Contact</h3>
+                    <button class="close-modal text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <form id="contactForm" class="p-6">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
+                            <input type="text" id="contactName" class="input-field" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                            <input type="email" id="contactEmail" class="input-field" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone</label>
+                            <input type="tel" id="contactPhone" class="input-field">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Company</label>
+                            <input type="text" id="contactCompany" class="input-field">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Type</label>
+                            <select id="contactType" class="input-field">
+                                <option value="client">Client</option>
+                                <option value="prospect">Prospect</option>
+                                <option value="supplier">Supplier</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Notes</label>
+                            <textarea id="contactNotes" class="input-field" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="flex justify-end space-x-3 mt-6">
+                        <button type="button" class="close-modal btn-secondary">Cancel</button>
+                        <button type="submit" class="btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Task Modal -->
+    <div id="taskModal" class="modal fixed inset-0 bg-black bg-opacity-50 z-50" style="display: none;">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full">
+                <div class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white" id="taskModalTitle">New Task</h3>
+                    <button class="close-modal text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <form id="taskForm" class="p-6">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Title</label>
+                            <input type="text" id="taskTitle" class="input-field" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
+                            <textarea id="taskDescription" class="input-field" rows="3"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Priority</label>
+                            <select id="taskPriority" class="input-field">
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Due Date</label>
+                            <input type="datetime-local" id="taskDueDate" class="input-field">
+                        </div>
+                    </div>
+                    <div class="flex justify-end space-x-3 mt-6">
+                        <button type="button" class="close-modal btn-secondary">Cancel</button>
+                        <button type="submit" class="btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interaction Modal -->
+    <div id="interactionModal" class="modal fixed inset-0 bg-black bg-opacity-50 z-50" style="display: none;">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full">
+                <div class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Add Interaction</h3>
+                    <button class="close-modal text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <form id="interactionForm" class="p-6">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Type</label>
+                            <select id="interactionType" class="input-field">
+                                <option value="call">Call</option>
+                                <option value="email">Email</option>
+                                <option value="meeting">Meeting</option>
+                                <option value="whatsapp">WhatsApp</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Date & Time</label>
+                            <input type="datetime-local" id="interactionDate" class="input-field">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
+                            <textarea id="interactionDescription" class="input-field" rows="3" placeholder="Describe the interaction..."></textarea>
+                        </div>
+                    </div>
+                    <div class="flex justify-end space-x-3 mt-6">
+                        <button type="button" class="close-modal btn-secondary">Cancel</button>
+                        <button type="submit" class="btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Detail Modal -->
+    <div id="contactDetailModal" class="modal fixed inset-0 bg-black bg-opacity-50 z-50" style="display: none;">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white" id="contactDetailTitle">Contact Details</h3>
+                    <button class="close-modal text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Contact Info -->
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Contact Information</h4>
+                            <div id="contactInfo" class="space-y-3">
+                                <!-- Contact info will be dynamically added here -->
+                            </div>
+                        </div>
+                        <!-- Interactions -->
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Recent Interactions</h4>
+                                <button class="add-interaction btn-primary text-sm">
+                                    <i class="fas fa-plus mr-1"></i>Add
+                                </button>
+                            </div>
+                            <div id="interactionsList" class="space-y-3">
+                                <!-- Interactions will be dynamically added here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./src/dashboard.js"></script>
+</body>
+</html> 

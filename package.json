@@ -1,0 +1,16 @@
+{
+  "name": "mincrm",
+  "version": "1.0.0",
+  "description": "Mini CRM simple para freelancers y emprendedores",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+  },
+  "keywords": ["crm", "freelancer", "contactos", "tareas"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+} 
