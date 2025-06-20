@@ -2,15 +2,25 @@
   "name": "mincrm",
   "version": "1.0.0",
   "description": "Mini CRM simple para freelancers y emprendedores",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+    "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "start": "node api/src/server.js",
+    "dev:api": "nodemon api/src/server.js"
   },
   "keywords": ["crm", "freelancer", "contactos", "tareas"],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5"
+  },
   "devDependencies": {
-    "tailwindcss": "^3.4.0"
+    "tailwindcss": "^3.4.0",
+    "nodemon": "^3.0.2"
   }
 } 
