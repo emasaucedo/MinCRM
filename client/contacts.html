@@ -1,20 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mini CRM - Contactos</title>
-    <link rel="stylesheet" href="css/contacts.css">
-</head>
-<body>
-    <h1>Gestión de Contactos</h1>
-    <nav>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="tasks.html">Tareas</a>
+    <link rel="stylesheet" href="css/contacts.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-content">
+        <h1>Gestión de Contactos</h1>
+        <button id="logoutBtn" class="logout-btn">Cerrar Sesión</button>
+      </div>
+    </header>
+
+    <nav class="navigation">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="tasks.html">Tareas</a>
     </nav>
-    <div id="contacts-list">
+
+    <main class="main-content">
+      <div id="contacts-list">
         <p>Lista de contactos</p>
-    </div>
+      </div>
+    </main>
+
+    <script src="js/auth.js"></script>
     <script src="js/contacts.js"></script>
-</body>
+  </body>
 </html>

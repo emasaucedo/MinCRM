@@ -3,18 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mini CRM - Login</title>
+    <title>Mini CRM - Registro</title>
     <link rel="stylesheet" href="css/login.css" />
   </head>
   <body>
     <div class="container">
       <div class="auth-card">
         <img src="assets/logo.png" alt="Mini CRM Logo" class="logo" />
-        <h1>Iniciar Sesión</h1>
+        <h1>Crear Cuenta</h1>
 
         <div id="message" class="message hidden"></div>
 
-        <form id="loginForm">
+        <form id="registerForm">
+          <div class="form-group">
+            <input
+              type="text"
+              id="name"
+              placeholder="Nombre completo"
+              required
+            />
+            <span class="error-message" id="nameError"></span>
+          </div>
           <div class="form-group">
             <input type="email" id="email" placeholder="Email" required />
             <span class="error-message" id="emailError"></span>
@@ -23,19 +32,28 @@
             <input
               type="password"
               id="password"
-              placeholder="Contraseña"
+              placeholder="Contraseña (mín. 6 caracteres)"
               required
             />
             <span class="error-message" id="passwordError"></span>
           </div>
-          <button type="submit" id="loginBtn">Ingresar</button>
+          <div class="form-group">
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder="Confirmar contraseña"
+              required
+            />
+            <span class="error-message" id="confirmPasswordError"></span>
+          </div>
+          <button type="submit" id="registerBtn">Registrarse</button>
         </form>
 
         <div class="auth-links">
-          <p>¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
+          <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a></p>
         </div>
       </div>
     </div>
-    <script src="js/login.js"></script>
+    <script src="js/register.js"></script>
   </body>
 </html>

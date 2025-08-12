@@ -1,15 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mini CRM - Inicio</title>
-    <link rel="stylesheet" href="css/dashboard.css">
-</head>
-<body>
-    <h1>Mini CRM</h1>
-    <p>Bienvenido al sistema de gestión de relaciones con clientes</p>
-    <a href="login.html">Iniciar Sesión</a>
-    <script src="js/dashboard.js"></script>
-</body>
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="auth-card">
+        <img src="assets/logo.png" alt="Mini CRM Logo" class="logo" />
+        <h1>Mini CRM</h1>
+        <p>Bienvenido al sistema de gestión de relaciones con clientes</p>
+
+        <div class="auth-links">
+          <a
+            href="login.html"
+            style="
+              display: inline-block;
+              margin: 10px;
+              padding: 10px 20px;
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              color: white;
+              text-decoration: none;
+              border-radius: 8px;
+            "
+            >Iniciar Sesión</a
+          >
+          <a
+            href="register.html"
+            style="
+              display: inline-block;
+              margin: 10px;
+              padding: 10px 20px;
+              border: 2px solid #667eea;
+              color: #667eea;
+              text-decoration: none;
+              border-radius: 8px;
+            "
+            >Registrarse</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>
+      // Redirect to dashboard if already authenticated
+      document.addEventListener("DOMContentLoaded", () => {
+        GlobalAuth.redirectIfAuthenticated();
+      });
+    </script>
+  </body>
 </html>
