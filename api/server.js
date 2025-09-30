@@ -5,8 +5,6 @@ import connectDB from "./config/db.js";
 
 // Import routes
 import authRoutes from "./routes/authRoutes.js";
-import contactRoutes from "./routes/contactRoutes.js";
-import taskRoutes from "./routes/taskRoutes.js";
 
 // Load environment variables
 dotenv.config();
@@ -29,8 +27,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/contacts", contactRoutes); // Protected routes
-app.use("/api/tasks", taskRoutes); // Protected routes
 
 // Basic route for testing
 app.get("/", (req, res) => {
